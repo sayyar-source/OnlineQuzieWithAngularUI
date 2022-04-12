@@ -1,0 +1,50 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Sınav Oluşturma</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Index.css" />
+    <link rel="stylesheet" href="~/css/AllSuggestions.css" />
+    <link rel="stylesheet" href="~/css/Ranklist.css" />
+
+    <script src="https://kit.fontawesome.com/f924ffe81b.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
+<body class="bg-style">
+    <header style="background-color:brown">
+        <ul class="customNav">
+            @{
+                var ss = User.Identity.IsAuthenticated;
+            }
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index" title="HOME"><i class="icon fas fa-home fa-2x" style="color: white"></i></a></li>
+            @if (ViewBag.authorized == true)
+            {
+<li><a class="nav-link text-dark" asp-area="" asp-controller="Question" asp-action="AddQuestion" title="SORU EKLE"><i class="icon fas fa-question-circle fa-2x" style="color: white"></i></a></li>
+                <li><a class="nav-link text-dark" asp-area="" asp-controller="Quiz" asp-action="AllQuizzes" title="SINAVLAR"><i class="icon far fa-list-alt fa-2x" style="color: white"></i></a></li>
+}
+            <li><partial name="_LoginPartial" /></li>
+        </ul>
+    </header>
+    <br />
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

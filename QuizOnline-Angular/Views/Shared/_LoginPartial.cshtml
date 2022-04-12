@@ -1,0 +1,19 @@
+﻿
+@if (ViewBag.authorized == true)
+{
+
+    <li>
+        <form id="logoutForm" hidden href="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        </form>
+        <a href="#" onclick="document.getElementById('logoutForm').submit()" title="ÇIKIŞ"><i class="icon fas fa-sign-out-alt fa-2x" style="color: white"></i><span class="nav-label"></span></a>
+    </li>
+ }
+else
+ {
+    <li>
+        <a class="nav-link text-dark"  href="/Home/Login" title="GİRİŞ YAP"><i class="icon fas fa-sign-in-alt fa-2x" style="color: white"></i></a>
+    </li>
+    <li>
+        <a class="nav-link text-dark" href="/Account/Register" title="ÜYE OL"><i class="icon fas fa-user-plus fa-2x" style="color: white"></i></a>
+    </li>
+ }

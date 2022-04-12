@@ -1,0 +1,54 @@
+﻿@model Quiz.Data.Models.Dtos.LoginViewModel
+
+@{ ViewData["Title"] = "GIRIŞ"; }
+
+<div id="loginModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@ViewData["Title"]</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="/login" method="post" style="padding:25px" ; direction:rtl">
+                <b>KULLANICI GIRIŞ</b>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <b><label>Kullanıcı Adı</label></b>
+                    <input asp-for="@Model.UserName" class="form-control" />
+                    <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <b><label>Şifre</label></b>
+                    <input asp-for="@Model.Password" class="form-control" />
+                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="margin-right:10px">GIRIŞ YAP</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">KAPAT</button>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <p>
+                        <a href="/Account/Register">ÜYE OL</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>$('#loginModal').modal('show');</script>
+
+

@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<AllQuizzesViewModel>
+@{ ViewData["Title"] = "AllQuizzes"; }
+<div class="row" style="border: 2px solid black">
+    <div class="col-1">
+        <h4>#</h4>
+    </div>
+    <div class="col-6">
+        <h4>Başlık</h4>
+    </div>
+    <div class="col-3">
+        <h4> Tarih</h4>
+    </div>
+    <div class="col-2">
+
+    </div>
+
+</div>
+@{
+    int count = 1;
+    foreach (var quiz in Model)
+    {
+        
+        <div class="row ">
+            <div class="col-1">
+                <h4>@count</h4>
+            </div>
+            <div class="col-6">
+                <h4>@quiz.Name</h4>
+            </div>
+            <div class="col-3">
+                <h4> @quiz.date</h4>
+            </div>
+            <div class="col-2">
+                <h4 onclick="deleteQuiz('@(quiz.Id)')" style="color: red; cursor: pointer;">Sil</h4>
+            </div>
+
+        </div>
+        count++;
+    }
+}
+<script>
+    function deleteQuiz(quizId) {
+        $.ajax({
+            url: "/Quiz/DeleteQuiz",
+            type: "POST",
+            data: { id: quizId },
+            traditional: true,
+            success: function (result) {
+                window.location.reload(true);
+            },
+            error: function () {
+                alert("Something went wrong");
+            }
+        });
+    }
+</script>
+
+
+

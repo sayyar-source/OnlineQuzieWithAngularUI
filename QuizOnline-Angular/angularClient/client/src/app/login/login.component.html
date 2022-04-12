@@ -1,0 +1,41 @@
+
+
+<div class="card">
+  <form #signupForm="ngForm" (ngSubmit)="userLogin(signupForm)">
+    <div class="container">
+      <b>Create new account</b>
+      <hr />
+      <div class="row justify-content-center" style="padding:20px">
+          <div class="form-group">
+            <label for="UserName">User Name</label>
+            <br />
+            <input type="text" class="form-control" name="UserName" id="UserName" [(ngModel)]="UserName" required>
+          </div>
+          <div class="form-group">
+            <label for="PasswordHash">Password</label>
+            <br />
+            <input type="password" class="form-control" name="PasswordHash" id="PasswordHash" [(ngModel)]="PasswordHash" required>
+          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center" style="margin-bottom:10px">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-danger" style="margin-left:10px" (click)="onClose()">Close</button>
+      </div>
+
+    </div>
+
+  </form>
+ 
+</div>
+
+
+
+
+
+
+
+
+
+

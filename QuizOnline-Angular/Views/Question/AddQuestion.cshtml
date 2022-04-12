@@ -1,0 +1,324 @@
+﻿@model  AddQuestionBindingModel
+@{
+    ViewData["Title"] = "soru ekle";
+}
+
+<style>
+    .btn-transparent {
+        background-color: transparent;
+        border: none;
+    }
+</style>
+
+<div class="row">
+    <div class="mx-auto">
+
+        <form id="addQuestionForm" asp-controller="Question" asp-action="AddQuestion" method="post">
+           
+            <input type="hidden" asp-for="Name" id="SelectedQuizName" value="Model.Name" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mx-auto card-holder">
+                <div class="quizCard text-left" style="
+        width: 20em;
+        box-shadow: 5px 8px 10px black, 0 0 27px green, 0 0 10px darkblue;
+        background: #0f97f5;
+        opacity: 0.9;">
+                    <div class="form-group">
+
+                        <label asp-for="QuizUrl" class="control-label">Yazı</label>
+                        <select id="quizid" asp-for="QuizUrl" class="form-control" asp-items="ViewBag.Quizzes">
+                            <option selected="selected">
+                                Lütfen istediğiniz soruyu seçin
+                            </option>
+                        </select>
+                    </div>
+                    <textarea asp-for="Text" class="d-inline-flex p-2" id="quizbody" rows="10" cols="50">
+                  
+                   </textarea>
+
+                    <div style="margin-top:15px">
+                        <div>
+                            <label asp-for="QuizQuestions[0].QuestionName" class="control-label">Soru 1</label>
+                            <input asp-for="QuizQuestions[0].QuestionName" class="form-control" />
+                            <span asp-validation-for="QuizQuestions[0].QuestionName" class="text-danger"></span>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[0].FirstOption">A)</label>
+                            </div>
+
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[0].FirstOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[0].FirstOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[0].SecondOption">B)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[0].SecondOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[0].SecondOption" class="text-danger"></span>
+
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[0].ThirdOption">C)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[0].ThirdOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[0].ThirdOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[0].FourthOption">D)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[0].FourthOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[0].FourthOption" class="text-danger"></span>
+
+                        </div>
+
+                        <div style="margin-right:100px;margin-left:100px">
+                            <select id="quizAnswer" asp-for="QuizQuestions[0].CorrectAnswer" class="form-control">
+
+
+                                <option selected>Doğru Cevap Seç</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px">
+                        <div>
+                            <label asp-for="QuizQuestions[1].QuestionName" class="control-label">Soru 2</label>
+                            <input asp-for="QuizQuestions[1].QuestionName" class="form-control" />
+                            <span asp-validation-for="QuizQuestions[1].QuestionName" class="text-danger"></span>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[1].FirstOption">A)</label>
+                            </div>
+
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[1].FirstOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[1].FirstOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[1].SecondOption">B)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[1].SecondOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[1].SecondOption" class="text-danger"></span>
+
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[1].ThirdOption">C)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[1].ThirdOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[1].ThirdOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[1].FourthOption">D)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[1].FourthOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[1].FourthOption" class="text-danger"></span>
+
+                        </div>
+                        <div style="margin-right:100px;margin-left:100px">
+                            <select id="quizAnswer" asp-for="QuizQuestions[1].CorrectAnswer" class="form-control">
+
+
+                                <option selected>Doğru Cevap Seç</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div style="margin-top:15px">
+                        <div>
+                            <label asp-for="QuizQuestions[2].QuestionName" class="control-label">Soru 3</label>
+                            <input asp-for="QuizQuestions[2].QuestionName" class="form-control" />
+                            <span asp-validation-for="QuizQuestions[2].QuestionName" class="text-danger"></span>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[2].FirstOption">A)</label>
+                            </div>
+
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[2].FirstOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[2].FirstOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[2].SecondOption">B)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[2].SecondOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[2].SecondOption" class="text-danger"></span>
+
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[2].ThirdOption">C)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[2].ThirdOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[2].ThirdOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[2].FourthOption">D)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[2].FourthOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[2].FourthOption" class="text-danger"></span>
+
+                        </div>
+                        <div style="margin-right:100px;margin-left:100px">
+                            <select id="quizAnswer" asp-for="QuizQuestions[2].CorrectAnswer" class="form-control">
+
+
+                                <option selected>Doğru Cevap Seç</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div style="margin-top:15px">
+                        <div>
+                            <label asp-for="QuizQuestions[3].QuestionName" class="control-label">Soru 4</label>
+                            <input asp-for="QuizQuestions[3].QuestionName" class="form-control" />
+                            <span asp-validation-for="QuizQuestions[3].QuestionName" class="text-danger"></span>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[3].FirstOption">A)</label>
+                            </div>
+
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[3].FirstOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[3].FirstOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[3].SecondOption">B)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[3].SecondOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[3].SecondOption" class="text-danger"></span>
+
+                        </div>
+                        <div class="row" style="margin-top:5px">
+                            <div class="col-md-1">
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[3].ThirdOption">C)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[3].ThirdOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[3].ThirdOption" class="text-danger"></span>
+
+                            <div class="col-md-1">
+
+                                <label class="col-sm-1 col-form-label" asp-for="QuizQuestions[3].FourthOption">D)</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input asp-for="QuizQuestions[3].FourthOption" class="form-control" />
+
+                            </div>
+                            <span asp-validation-for="QuizQuestions[3].FourthOption" class="text-danger"></span>
+
+                        </div>
+                        <div style="margin-right:100px;margin-left:100px">
+                            <select id="quizAnswer" asp-for="QuizQuestions[3].CorrectAnswer" class="form-control">
+
+
+                                <option selected>Doğru Cevap Seç</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="text-center" style="margin-top:15px">
+                        <button type="submit" class="btn btn-success">SINAV OLUŞTUR</button>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#quizid").on("change", function () {
+           
+            $.ajax({
+                url: "/Question/DescriptionQuiz",
+                type: "GET",
+                data: { hrefUrl: $("#quizid").val() },
+                traditional: true,
+                success: function (result) {
+                   
+                
+                   
+                    document.getElementById('quizbody').innerHTML = result
+                    
+                },
+                error: function () {
+                    alert("Something went wrong");
+                }
+            });
+        });
+
+        $("#quizid").change(function (evt) {
+            $("#SelectedQuizName").val($("#quizid option:selected").text().trim());
+           
+        });
+    }); 
+</script>

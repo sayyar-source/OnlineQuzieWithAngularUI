@@ -1,0 +1,41 @@
+﻿@model Quiz.Data.Models.Dtos.LoginViewModel
+
+@{ ViewData["Title"] = "GIRIŞ"; }
+
+<div  class="card" >
+ 
+      
+
+            <form id="account" method="post" style="padding:25px" ; direction:rtl">
+                <b>KULLANICI GIRIŞ</b>
+                <hr />
+              
+                <div class="form-group">
+                    <b><label>Kullanıcı Adı</label></b>
+                    <input asp-for="@Model.UserName" class="form-control" />
+                  
+                </div>
+                <div class="form-group">
+                    <b><label>Şifre</label></b>
+                    <input asp-for="@Model.Password" class="form-control" />
+               
+                </div>
+       
+                <div class="form-group">
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="margin-right:10px">GIRIŞ YAP</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">KAPAT</button>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <p>
+                        <a href="/Account/Register" >ÜYE OL</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+ 
+
+

@@ -1,0 +1,67 @@
+
+<div class="card" >
+  <form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
+    <div class="container">
+      <b>Create new account</b>
+      <hr />
+      <div class="row justify-content-center" style="padding:20px">
+        
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="FirstName">First Name</label>
+              <br />
+              <input type="text" class="form-control" name="FirstName" id="FirstName" [(ngModel)]="FirstName" required>
+
+            </div>
+            <div class="form-group">
+              <label for="LastName">Last Name</label>
+              <br />
+              <input type="text" class="form-control" name="LastName" id="LastName" [(ngModel)]="LastName" required>
+            </div>
+            <div class="form-group">
+              <label for="Email">Email</label>
+              <br />
+              <input type="Email" class="form-control" name="Email" id="Email" [(ngModel)]="Email" required>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="UserName">User Name</label>
+              <br />
+              <input type="text" class="form-control" name="UserName" id="UserName" [(ngModel)]="UserName" required>
+            </div>
+            <div class="form-group">
+              <label for="PasswordHash">Password</label>
+              <br />
+              <input type="password" class="form-control" name="PasswordHash" id="PasswordHash" [(ngModel)]="PasswordHash" required>
+            </div>
+            <div class="form-group">
+              <label for="PhoneNumber">Phone Number</label>
+              <br />
+              <input type="text" class="form-control" name="PhoneNumber" id="PhoneNumber" [(ngModel)]="PhoneNumber" required>
+            </div>
+          </div>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col text-center" style="margin-bottom:10px">
+          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="button" class="btn btn-danger" style="margin-left:10px" (click)="onClose()">Close</button>
+        </div>
+     
+    </div>
+  
+  </form>
+  <div *ngIf="showMessage">
+    <h3>Thanks You {{formData.username}} for registration</h3>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,135 @@
+﻿@model QuizViewModel
+
+
+<style>
+    .bg-quizLogo {
+        color: #fff;
+        background: linear-gradient(-70deg, #045de9 0%, rgba(0, 0, 0, 0) 74%), url('@Model.QuizUrl');
+        background-repeat: no-repeat;
+        background-size: contain;
+        text-align: right;
+        border-top-right-radius: 1em;
+        border-bottom-right-radius: 1em;
+    }
+    .checked {
+        background-color:cornflowerblue;
+    }
+    .correct {
+        background-color: chartreuse;
+    }
+    .incorrect {
+        background-color:red;
+    }
+   
+</style>
+
+<br />
+<div class="text-center">
+    <div>
+        <h3>@Model.Name</h3>
+    </div>
+    <div>
+        <textarea class="d-inline-flex p-2" id="quizbody" rows="20" cols="150">@Model.Text</textarea>
+    </div>
+</div>
+<hr />
+
+@{ var questions = Model.QuizQuestions as QuestionViewModel[] ?? Model.QuizQuestions.ToArray(); }
+
+@if (Model.QuizQuestions.Count() == 0)
+{
+<div class="row">
+    <div class="mx-auto card-holder">
+        <div class="quizCard text-center" style="width: 20em;">
+            <p>Henüz kayıtlı sinav yok</p>
+           
+        </div>
+    </div>
+</div> 
+}
+ 
+else
+ {
+@*<form asp-controller="Quiz" asp-action="StartQuiz" method="post">*@
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row ">
+ @{ 
+     var count = 0;
+   
+     for (var i = 0; i < questions.Length; i++)
+     {
+         count = i + 1;
+     
+          <div id="@count" class="col-6">
+                <h4>@count) @questions[i].QuestionName</h4>
+                <input  type="hidden" asp-for="Answers[i].QuestionId" value="@questions[i].QuizId" />
+                    <label id="1_@i"  style="cursor: pointer; border: 2px solid black;min-width:100%">A)&nbsp;@questions[i].FirstOption </label>
+                    <label id="2_@i" style="cursor: pointer; border: 2px solid black;min-width:100%">B)&nbsp;@questions[i].SecondOption </label>
+                    <label id="3_@i" style="cursor: pointer; border: 2px solid black;min-width:100%">C)&nbsp;@questions[i].ThirdOption</label>
+                    <label id="4_@i" style="cursor: pointer; border: 2px solid black;min-width:100%">D)&nbsp; @questions[i].FourthOption</label>   
+          </div> 
+    }
+}
+    </div>
+    <div class="col-md-12 text-center">
+        <br />
+        <button class="btn btn-success" onclick="answer('@(Model.Id)')">SINAVI TAMAMLA</button>
+        @*<button class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">SINAVI TAMAMLA</button>*@
+    </div>
+@*</form>*@
+ <div>
+
+</div>
+}
+<script>
+    $('label').click(function () {
+        for (var i = 0; i < this.parentNode.childNodes.length; i++) {
+            
+            if (this.parentNode.childNodes[i].className == "checked") {
+                labelId = this.parentNode.childNodes[i].id
+                $('#' + labelId).toggleClass("checked")
+            }
+            if (this.parentNode.childNodes[i].className == "correct") {
+                    labelId = this.parentNode.childNodes[i].id
+                    $('#' + labelId).toggleClass("correct")
+            }
+            if (this.parentNode.childNodes[i].className == "incorrect") {
+                labelId = this.parentNode.childNodes[i].id
+                $('#' + labelId).toggleClass("incorrect")
+            }
+        }
+    $(this).toggleClass("checked")   
+    });
+    function answer(quizid)
+    {
+        $.ajax({
+            url: "/Quiz/GetQuizById",
+            type: "GET",
+            data: { quizId: quizid },
+            traditional: true,
+            success: function (result) {
+                for (var i = 0; i < result.quizQuestions.length; i++) {
+                    var doc = document.getElementById(i + 1);
+                    for (var j = 0; j < doc.childNodes.length; j++) {
+                        if (doc.childNodes[j].className == "checked") {
+                            lblId = doc.childNodes[j].id.substring(0, 1);
+                            correctAnswer = result.quizQuestions[i].correctAnswer
+                            if (lblId == correctAnswer) {
+                                $('#' + doc.childNodes[j].id).toggleClass("checked")
+                                $('#' + doc.childNodes[j].id).toggleClass("correct")
+                            }
+                            else {
+                                $('#' + doc.childNodes[j].id).toggleClass("checked")
+                                $('#' + doc.childNodes[j].id).toggleClass("incorrect")
+                            }
+                        }
+                    }      
+                }
+            },
+            error: function () {
+                alert("Something went wrong");
+            }
+        });
+    }
+</script>
+
